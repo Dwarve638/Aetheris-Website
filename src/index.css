@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Marquee infinite scroll */
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Count-up glow */
+@keyframes countGlow {
+  0%, 100% { text-shadow: 0 0 8px rgba(30,144,255,0.4); }
+  50%       { text-shadow: 0 0 24px rgba(30,144,255,0.9); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0A0A0A;
+    color: #F5F5F5;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(30, 144, 255, 0.3);
+    color: #F5F5F5;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A0A0A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #1E90FF, #1565C0);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #4facfe, #1E90FF);
+    box-shadow: 0 0 8px rgba(30, 144, 255, 0.5);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] rounded-2xl;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .glass-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(30, 144, 255, 0.25);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 28px rgba(30, 144, 255, 0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  /* Scroll offset so fixed navbar doesn't cover section headings */
+  section[id] {
+    scroll-margin-top: 120px;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-grotesk font-semibold text-sm tracking-wide transition-all duration-300 cursor-pointer;
+    background: linear-gradient(135deg, #1E90FF, #1565C0);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(30, 144, 255, 0.35), 0 4px 16px rgba(0,0,0,0.3);
+    border: 1px solid rgba(30, 144, 255, 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 36px rgba(30, 144, 255, 0.55), 0 8px 24px rgba(0,0,0,0.4);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  .btn-primary:focus-visible,
+  .btn-secondary:focus-visible {
+    outline: 2px solid #1E90FF;
+    outline-offset: 3px;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-grotesk font-semibold text-sm tracking-wide transition-all duration-300 cursor-pointer;
+    background: transparent;
+    color: #F5F5F5;
+    border: 1px solid rgba(245, 245, 245, 0.2);
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(30, 144, 255, 0.5);
+    color: #1E90FF;
+    box-shadow: 0 0 16px rgba(30, 144, 255, 0.15);
+    transform: translateY(-1px);
+  }
+
+  a:focus-visible {
+    outline: 2px solid #1E90FF;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .section-label {
+    @apply inline-block text-xs font-grotesk font-semibold tracking-[0.2em] uppercase mb-3;
+    color: #1E90FF;
+  }
+
+  .section-title {
+    @apply font-grotesk font-bold text-brand-white leading-tight;
+  }
+
+  .fade-section {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
