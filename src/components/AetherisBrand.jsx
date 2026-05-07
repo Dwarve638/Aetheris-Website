@@ -52,6 +52,7 @@ const CLIP_STYLE = {
 const CA_BASE_STYLE = {
   position: 'absolute', top: 0, left: 0,
   display: 'block',
+  fontFamily: '"Rubik Glitch", monospace',
   fontSize: 'clamp(28px, 7.8vw, 112px)',
   letterSpacing: '0.12em',
   lineHeight: 1,
@@ -63,6 +64,7 @@ const CA_BASE_STYLE = {
 
 const MAIN_TEXT_BASE = {
   display: 'block',
+  fontFamily: '"Rubik Glitch", monospace',
   fontSize: 'clamp(28px, 7.8vw, 112px)',
   letterSpacing: '0.12em',
   lineHeight: 1,
@@ -80,6 +82,7 @@ const MAIN_TEXT_BASE = {
 const SLICE_TEXT_BASE = {
   position: 'absolute', top: 0, left: 0,
   display: 'block',
+  fontFamily: '"Rubik Glitch", monospace',
   fontSize: 'clamp(28px, 7.8vw, 112px)',
   letterSpacing: '0.12em',
   lineHeight: 1,
